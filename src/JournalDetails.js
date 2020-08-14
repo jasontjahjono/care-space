@@ -31,18 +31,39 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {withStyles} from '@material-ui/styles';
 
 const styles = {
+    diagonal: {
+        backgroundColor: "#5AA7A7"
+    },
+    diagonalcontent: {
+        backgroundColor: "#96D7C6"
+    },
     diagonaltext: {
         fontFamily: "Rockwell",
         fontSize: "1.6rem",
         "& h1": {
             textAlign: "center"
         },
-        "& hr": {
-            height: "30px",
-            borderStyle: "dotted none none",
-            borderWidth: "5px",
-            width: "20%"
+        "& hr":{
+            border: "0",
+            margin: "1.35rem auto",
+            maxWidth: "100%",
+            backgroundPosition: "50%",
+            boxSizing: "border box"
         }
+    },
+    divider: {
+        height: "20px",
+        width: "60%",
+        backgroundImage: "radial-gradient(farthest-side at 50% -50%, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 0%, 0))",
+        position: "relative",
+        "&: before": {
+            height: "1px",
+            position: "absolute",
+            top: "-1px",
+            left: "0",
+            right: "0",
+            backgroundImage: "linear-gradient(90deg, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.75) 50%, hsla(0, 0%, 0%, 0))"
+                    }
 
     }
 }
@@ -51,48 +72,48 @@ class JournalDetails extends Component {
         moods: ["😟","😕","😐","🙂","😁"],
         tiredness: ["😴","😩","😶","😌","💪"],
         yesnoqtns: [
-            "Did You have a good sleep1?",
-            "Did You have a good sleep2?",
-            "Did You have a good sleep3?",
-            "Did You have a good sleep4?",
-            "Did You have a good sleep5?",
+            "Are you maintaining a healthy schedule to go to bed?",
+            "Have you been exercising a lot?",
+            "Have you been working towards your goal?",
+            "Have you been eating and drinking enough regularly?",
+            "Have you been keeping in touch with your friends and families?",
         ],
         categories: ["Work", "Physical Health", "Recreation"]
     }
     render() {
         const {date, mood, plus, minus, tired, meal, ynquestions, plan} = this.props.journal;
         const {moods, yesnoqtns, tiredness, categories, open, closeDetails, classes} = this.props;
-        let morning, hour;
-        let minutes = meal.getMinutes();
-        if(meal.getHours() >= 12) {
-            morning = false;
-            hour = meal.getHours() - 12;
-            if(hour < 10) {
-                hour = "0" + hour;
-            }
-        } else if(meal.getHours() === 0) {
-            morning = true;
-            hour = 12;
-        } else if(meal.getHours() < 10){
-            morning = true;
-            hour = "0" + meal.getHours();
-        } else {
-            morning = true;
-            hour = meal.getHours();
-        }
-        if(meal.getMinutes() < 10) minutes = "0" + meal.getMinutes();
-        const time = hour + ":" + minutes + (morning ? "AM" : "PM");
+        // let morning, hour;
+        // let minutes = meal.getMinutes();
+        // if(meal.getHours() >= 12) {
+        //     morning = false;
+        //     hour = meal.getHours() - 12;
+        //     if(hour < 10) {
+        //         hour = "0" + hour;
+        //     }
+        // } else if(meal.getHours() === 0) {
+        //     morning = true;
+        //     hour = 12;
+        // } else if(meal.getHours() < 10){
+        //     morning = true;
+        //     hour = "0" + meal.getHours();
+        // } else {
+        //     morning = true;
+        //     hour = meal.getHours();
+        // }
+        // if(meal.getMinutes() < 10) minutes = "0" + meal.getMinutes();
+        // const time = hour + ":" + minutes + (morning ? "AM" : "PM");
         return (
             <Dialog
                 open={open}
                 onClose={closeDetails}
                 scroll="paper"
             >
-                <DialogTitle>{date} Journal Details</DialogTitle>
-                <DialogContent dividers={true}>
+                <DialogTitle className={classes.diagonal}>{date} Journal Details</DialogTitle>
+                <DialogContent className={classes.diagonalcontent} dividers={true}>
                     <DialogContentText className={classes.diagonaltext}>
                         <h1>{date}</h1>
-                        <hr></hr>
+                        <hr className={classes.divider}></hr>
                         <h2>Mood Today: {moods[mood-1]}</h2>
                         <ul>Good Things:
                             {plus.map(item => (
@@ -105,7 +126,7 @@ class JournalDetails extends Component {
                             ))}
                         </ul>
                         <h4>Tiredness Level: {tiredness[tired-1]}</h4>
-                        <h4>Last Time I've had a Whole Meal: {time}</h4>
+                        <h4>Last Time I've had a Whole Meal: {meal}</h4>
                         <div>
                             {ynquestions.map((item,i) => (
                                 <div>
@@ -114,6 +135,7 @@ class JournalDetails extends Component {
                                 </div>
                             ))}
                         </div>
+                        <h4>Tomorrow's Goals</h4>
                         {plan.map((category,i) => (
                             <div>
                                 <h5>{categories[i]}</h5>
@@ -124,7 +146,7 @@ class JournalDetails extends Component {
                         ))}
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions className={classes.diagonal}>
                     <Button color="primary" onClick={closeDetails}>
                         Back
                     </Button>

@@ -6,7 +6,8 @@ export default [
         plus: ["Learning", "relax time"],
         minus: ["brokenhearted"], 
         tired: 4, 
-        meal: new Date('2014-08-18T23:21:54'), 
+        // meal: new Date('2014-08-18T23:21:54'), 
+        meal: "08:30PM",
         ynquestions: [true, false, true, false, true], 
         plan: [
             ["Do my math HW", "Begin a website"],
@@ -21,7 +22,7 @@ export default [
         plus: ["Family time", "Visited a zoo"],
         minus: ["Exhausted"], 
         tired: 5, 
-        meal: new Date('2014-08-18T12:00:54'), 
+        meal: "08:30PM",
         ynquestions: [false, false, true, true, true], 
         plan: [
             ["Study for a math test", "Continue building the website"],
@@ -36,7 +37,7 @@ export default [
         plus: ["Learned new things from the internet"],
         minus: ["Nothing"], 
         tired: 3, 
-        meal: new Date('2014-08-18T11:59:54'), 
+        meal: "08:30PM", 
         ynquestions: [true, false, true, false, false], 
         plan: [
             ["Study for a math test"],
@@ -51,7 +52,7 @@ export default [
         plus: ["Learned new things from the internet"],
         minus: ["Nothing"], 
         tired: 3, 
-        meal: new Date('2014-08-18T00:13:54'), 
+        meal: "08:30PM", 
         ynquestions: [true, false, true, false, false], 
         plan: [
             ["Study for a math test"],
@@ -66,7 +67,7 @@ export default [
         plus: ["It's almost weekend!"],
         minus: ["Failed my math test today"], 
         tired: 3, 
-        meal: new Date('2014-08-18T18:00:54'), 
+        meal: "08:30PM", 
         ynquestions: [false, false, true, false, false], 
         plan: [
             ["Review math topics", "Continue building the website"],
@@ -81,7 +82,7 @@ export default [
         plus: ["Hung out with friends", "Met an old friend"],
         minus: ["Tired socializing"], 
         tired: 4, 
-        meal: new Date('2014-08-18T09:03:54'), 
+        meal: "08:30PM", 
         ynquestions: [true, false, true, true, true], 
         plan: [
             ["Learn how to use javascript"],
@@ -96,7 +97,7 @@ export default [
         plus: ["Adopted a cat today!"],
         minus: ["Nothing"], 
         tired: 2, 
-        meal: new Date('2014-08-18T21:11:54'), 
+        meal: "08:30PM",
         ynquestions: [true, false, true, true, true], 
         plan: [
             ["Learn more about javascript", "Continue on the website"],

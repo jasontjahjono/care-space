@@ -8,7 +8,8 @@ const styles = {
         justifyContent: 'center',
         flexWrap: 'wrap',
         margin: '3px',
-        overflowX: 'auto',
+        marginX: 'auto',
+        paddingRight: '10px',
     }
 }
 

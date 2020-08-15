@@ -24,16 +24,14 @@ class JournalFormInput extends Component {
         const {inputValue} = this.state;
         const {label} = this.props
         return (
-            <div>
-                <TextField
-                    label={label}
-                    variant="outlined"
-                    onChange={this.handleChange}
-                    value={inputValue}
-                    onKeyDown={this.keyPress}
-                />
-            </div>
-        )
+            <TextField
+                label={label}
+                variant="outlined"
+                onChange={this.handleChange}
+                value={inputValue}
+                onKeyDown={this.keyPress}
+            />
+    )
     }
  }
  export default JournalFormInput;

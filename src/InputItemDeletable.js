@@ -12,7 +12,14 @@ const styles = {
     }
 }
 
-class InputItem extends Component {
+class InputItemDeletable extends Component {
+    constructor(props) {
+        super(props);
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+    handleDelete() {
+        this.props.deleteItem(this.props.text);
+    }
     render() {
         const {classes, color, text, variant} = this.props;
         return (
@@ -20,6 +27,7 @@ class InputItem extends Component {
                 <Chip
                     label={text}
                     color={color}
+                    onDelete={this.handleDelete}
                     variant={variant}
                 />
             </div>
@@ -27,4 +35,4 @@ class InputItem extends Component {
     }
 }
 
-export default withStyles(styles)(InputItem);
+export default withStyles(styles)(InputItemDeletable);

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import JournalList from './JournalList';
+import Dashboard from './Dashboard';
 import JournalHistory from './JournalHistory';
 import JournalNewForm from './JournalNewForm';
 import seedData from './seedData';
 import FAQ from './FAQ';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router';
 import './App.css'
 
 class App extends Component {
@@ -12,12 +12,12 @@ class App extends Component {
     super(props);
     const savedJournals = JSON.parse(window.localStorage.getItem("journals"));
     this.state = {
-      journals: savedJournals || seedData
+      journals: savedJournals || seedData,
     };
     this.saveJournal = this.saveJournal.bind(this);
   }
   saveJournal(newJournal) {
-    this.setState({journals: [...this.state.journals, newJournal]}, this.syncLocalStorage);
+    this.setState({journals: [newJournal, ...this.state.journals]}, this.syncLocalStorage);
   }
   syncLocalStorage() {
     window.localStorage.setItem("journals", JSON.stringify(this.state.journals));
@@ -28,7 +28,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" render={() =>
-            <JournalList journals={journals} />
+            <Dashboard journals={journals}/>
           }/>
           <Route exact path="/journals/all" render={() =>
             <JournalHistory journals={journals} />

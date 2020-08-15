@@ -29,124 +29,66 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {withStyles} from '@material-ui/styles';
+import JournalDetailsSlider from './JournalDetailsSlider';
+import InputItem from './InputItem';
+import YesNoQuestion from './YesNoQuestion';
 
 const styles = {
-    diagonal: {
-        backgroundColor: "#5AA7A7"
+    dialogBox: {
+        borderRadius: "50px",
     },
-    diagonalcontent: {
-        backgroundColor: "#96D7C6"
-    },
-    diagonaltext: {
-        fontFamily: "Rockwell",
-        fontSize: "1.6rem",
-        "& h1": {
-            textAlign: "center"
-        },
-        "& hr":{
-            border: "0",
-            margin: "1.35rem auto",
-            maxWidth: "100%",
-            backgroundPosition: "50%",
-            boxSizing: "border box"
-        }
-    },
-    divider: {
-        height: "20px",
-        width: "60%",
-        backgroundImage: "radial-gradient(farthest-side at 50% -50%, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 0%, 0))",
-        position: "relative",
-        "&: before": {
-            height: "1px",
-            position: "absolute",
-            top: "-1px",
-            left: "0",
-            right: "0",
-            backgroundImage: "linear-gradient(90deg, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.75) 50%, hsla(0, 0%, 0%, 0))"
-                    }
-
+    dialogNonContent: {
+        backgroundColor: "#fafafa",
     }
 }
 class JournalDetails extends Component {
     static defaultProps = {
-        moods: ["😟","😕","😐","🙂","😁"],
-        tiredness: ["😴","😩","😶","😌","💪"],
-        yesnoqtns: [
-            "Are you maintaining a healthy schedule to go to bed?",
-            "Have you been exercising a lot?",
-            "Have you been working towards your goal?",
-            "Have you been eating and drinking enough regularly?",
-            "Have you been keeping in touch with your friends and families?",
-        ],
-        categories: ["Work", "Physical Health", "Recreation"]
+        categories: ["Work Plan", "Physical Health Plan", "Recreation Plan"]
     }
     render() {
         const {date, mood, plus, minus, tired, meal, ynquestions, plan} = this.props.journal;
-        const {moods, yesnoqtns, tiredness, categories, open, closeDetails, classes} = this.props;
-        // let morning, hour;
-        // let minutes = meal.getMinutes();
-        // if(meal.getHours() >= 12) {
-        //     morning = false;
-        //     hour = meal.getHours() - 12;
-        //     if(hour < 10) {
-        //         hour = "0" + hour;
-        //     }
-        // } else if(meal.getHours() === 0) {
-        //     morning = true;
-        //     hour = 12;
-        // } else if(meal.getHours() < 10){
-        //     morning = true;
-        //     hour = "0" + meal.getHours();
-        // } else {
-        //     morning = true;
-        //     hour = meal.getHours();
-        // }
-        // if(meal.getMinutes() < 10) minutes = "0" + meal.getMinutes();
-        // const time = hour + ":" + minutes + (morning ? "AM" : "PM");
+        const {categories, open, closeDetails, classes} = this.props;
         return (
             <Dialog
                 open={open}
                 onClose={closeDetails}
                 scroll="paper"
+                className={classes.dialogBox}
             >
-                <DialogTitle className={classes.diagonal}>{date} Journal Details</DialogTitle>
-                <DialogContent className={classes.diagonalcontent} dividers={true}>
-                    <DialogContentText className={classes.diagonaltext}>
-                        <h1>{date}</h1>
-                        <hr className={classes.divider}></hr>
-                        <h2>Mood Today: {moods[mood-1]}</h2>
-                        <ul>Good Things:
-                            {plus.map(item => (
-                                <li>{item}</li>
-                            ))}
-                        </ul>
-                        <ul>Bad Things:
-                            {minus.map(item => (
-                                <li>{item}</li>
-                            ))}
-                        </ul>
-                        <h4>Tiredness Level: {tiredness[tired-1]}</h4>
-                        <h4>Last Time I've had a Whole Meal: {meal}</h4>
+                <DialogTitle className={classes.dialogNonContent}>Entry {date}</DialogTitle>
+                <DialogContent dividers={true}>
+                    <DialogContentText>
+                        <h3>Mood:</h3>
+                        <JournalDetailsSlider type="moods" value={mood}/>
+                        <h3>Positive Things:</h3>
+                        {plus.map(item => (
+                            <InputItem text={item} color="primary" variant="default"/>
+                        ))}
+                        <h3>Negative Things:</h3>
+                        {minus.map(item => (
+                            <InputItem text={item} color="secondary" variant="default"/>
+                        ))}
+                        <h3>Energy Level:</h3>
+                        <JournalDetailsSlider type="tired" value={tired}/>
+                        <h3>Last Time I've had a Whole Meal: <span>{meal}</span></h3>
+                        <h3>Daily Self-Care Questions: </h3>
                         <div>
                             {ynquestions.map((item,i) => (
-                                <div>
-                                    <h5>{yesnoqtns[i]}</h5>
-                                    <p>{item ? "Yes" : "No"}</p>
-                                </div>
+                                <YesNoQuestion index={i} checked={item} disabled={true}/>
                             ))}
                         </div>
-                        <h4>Tomorrow's Goals</h4>
+                        <h3>Tomorrow's Goals</h3>
                         {plan.map((category,i) => (
                             <div>
-                                <h5>{categories[i]}</h5>
+                                <h4>{categories[i]}</h4>
                                 {category.map(item => (
-                                    <p>{item}</p>
+                                    <InputItem text={item} color="primary" variant="outlined"/>
                                 ))}
                             </div>
                         ))}
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions className={classes.diagonal}>
+                <DialogActions className={classes.dialogNonContent}>
                     <Button color="primary" onClick={closeDetails}>
                         Back
                     </Button>

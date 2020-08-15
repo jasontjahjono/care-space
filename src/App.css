@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  font-family: "Mulish";
+  background: rgb(211,241,255);
+  background: linear-gradient(0deg, rgba(211,241,255,1) 0%, rgba(233,233,255,1) 100%);
+  padding: 50px;
 }
 
 .App-logo {

@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
+import {withStyles} from '@material-ui/styles';
 import JournalDetails from './JournalDetails';
+
+const styles = {
+    root: {
+        width: "500px",
+        margin: "auto",
+        "&:hover div": {
+            transition: "transform 0.3s ease",
+            transform: "scale(1.1)",
+            opacity: "0.8"
+        }
+    },
+    container: {
+        border: "1px solid black",
+        borderRadius: "30px",
+        backgroundColor: "#c6f2f5",
+        boxShadow: "2px 2px 7px rgba(0,0,0,0.4)",
+        padding: "15px"
+    },
+    date: {
+        margin: 0,
+        marginBottom: 5
+    },
+    mood: {
+        margin: 0,
+        "& span": {
+            fontSize: "2rem"
+        }
+    }
+}
 
 class JournalSnippet extends Component {
     static defaultProps = {
-        moods: ["😟","😕","😐","🙂","😁"],
-        tiredness: ["😴","😩","😶","😌","💪"],
-        yesnoqtns: [
-            "Did You have a good sleep1?",
-            "Did You have a good sleep2?",
-            "Did You have a good sleep3?",
-            "Did You have a good sleep4?",
-            "Did You have a good sleep5?",
-        ],
-        categories: ["Work", "Physical Health", "Recreation"]
+        moods: ["😟","😕","😐","🙂","😁"]
     }
     constructor(props) {
         super(props);
@@ -29,14 +50,16 @@ class JournalSnippet extends Component {
         this.setState({openDetails: false});
     }
     render() {
-        const {journal, moods} = this.props;
+        const {journal, moods, classes} = this.props;
         const {mood, date} = this.props.journal;
         const {openDetails} = this.state;
         return (
-            <div>
-                <div onClick={this.handleOpen} style={{backgroundColor: "lightblue", border:"4px solid black"}}>
-                    <h3>{date}</h3>
-                    <h4>mood: {moods[mood-1]}</h4>
+            <div className={classes.root}>
+                <div onClick={this.handleOpen} className={classes.container}>
+                    <h3 className={classes.date}>Entry Date: {date}</h3>
+                    <h4 className={classes.mood}>
+                        Mood: <span>{moods[mood-1]}</span>
+                    </h4>
                 </div>
                 <JournalDetails journal={journal} open={openDetails} closeDetails={this.handleClose}/>
             </div>
@@ -44,4 +67,4 @@ class JournalSnippet extends Component {
     }
 }
 
-export default JournalSnippet;
+export default withStyles(styles)(JournalSnippet);

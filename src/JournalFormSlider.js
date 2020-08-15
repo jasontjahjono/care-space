@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {withStyles} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
 const styles = {
     slider: {
-        width: 200,
-        margin: "auto",
+        width: 250,
+        margin: "20px auto",
         "& div": {
             transform: "scale(1.5)"
         }
@@ -49,12 +48,9 @@ class JournalFormSlider extends Component {
             : tired[tired.findIndex((item) => item.value === value)].label
     }
     render() {
-        const {classes, type} = this.props;
+        const {classes, type, disabled} = this.props;
         return (
             <div className={classes.slider}>
-                <Typography gutterBottom>
-                    {type === "moods" ? "How is Your Mood Today?" : "How Tired are You Today?"}
-                </Typography>
                 <div>
                     <Slider 
                         onChange={this.handleChange}

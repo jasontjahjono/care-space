@@ -1,5 +1,20 @@
 export default [
     {
+        // 32th Entry
+        date: "15/08/2020",
+        mood: 2,
+        plus: ["started a new startup idea", "finished a website"],
+        minus: ["Food poisoning"], 
+        tired: 5, 
+        meal: "8:00PM", 
+        ynquestions: [false, false, true, true, true], 
+        plan: [
+            ["Do civics homework"],
+            ["30 Pushups", "10 Situps", "20 pull-ups"],
+            ["go fishing"]
+        ]
+    },
+    {
         // 31st Entry
         date: "14/08/2020",
         mood: 4,

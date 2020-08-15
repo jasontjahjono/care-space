@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {withStyles} from '@material-ui/styles';
 import {Link} from 'react-router-dom';
-import JournalSnippet from './JournalSnippet';
+import {withStyles} from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
+import JournalSnippet from './JournalSnippet';
 
 const styles = {
     root: {

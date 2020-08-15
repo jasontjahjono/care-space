@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/styles';
-import JournalSnippet from './JournalSnippet';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom';
+import JournalSnippet from './JournalSnippet';
 import ActivityNotification from './ActivityNotification';
 
 const styles = {

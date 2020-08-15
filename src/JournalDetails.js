@@ -12,7 +12,7 @@ import YesNoQuestion from './YesNoQuestion';
 
 const styles = {
     dialogBox: {
-        borderRadius: "50px",
+        borderRadius: "50px"
     },
     dialogNonContent: {
         backgroundColor: "#fafafa",
@@ -31,6 +31,7 @@ class JournalDetails extends Component {
                 onClose={closeDetails}
                 scroll="paper"
                 className={classes.dialogBox}
+                fullWidth
             >
                 <DialogTitle className={classes.dialogNonContent}>Entry {date}</DialogTitle>
                 <DialogContent dividers={true}>

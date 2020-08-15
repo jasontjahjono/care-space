@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Typist from 'react-typist';
 import {withStyles} from '@material-ui/styles';
+import Grow from '@material-ui/core/Grow';
 import JournalList from './JournalList';
 import ProgressGraph from './ProgressGraph';
-import Typist from 'react-typist';
 import FAQ from './FAQ';
-import Grow from '@material-ui/core/Grow';
+
 
 const styles = {
     root: {

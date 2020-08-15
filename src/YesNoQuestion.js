@@ -3,11 +3,11 @@ import Switch from '@material-ui/core/Switch';
 import {withStyles} from '@material-ui/core';
 
 const questions = [
-    "Are you maintaining a healthy schedule to go to bed?",
+    "Do you maintain a healthy sleep schedule?",
     "Have you been exercising a lot?",
     "Have you been working towards your goal?",
-    "Have you been eating and drinking enough regularly?",
-    "Have you been interacting with friends & families?",
+    "Have you been eating & drinking enough?",
+    "Have you been interacting with others?",
 ];
 
 const styles = {

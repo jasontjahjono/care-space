@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
+import Fade from '@material-ui/core/Fade';
 import JournalFormSlider from './JournalFormSlider';
 import JournalFormInput from './JournalFormInput';
 import TimePicker from './TimePicker';
 import InputItem from './InputItem';
 import YesNoQuestion from './YesNoQuestion';
-import Fade from '@material-ui/core/Fade';
+
 
 const styles = {
     root: {

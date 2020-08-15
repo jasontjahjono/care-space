@@ -18,20 +18,26 @@ const styles = {
     container: {
         width: 900,
         margin: "auto",
-        paddingBottom: 40
+        paddingBottom: 40,
+        "& a": {
+            textDecoration: "none"
+        }
     },
     heading: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         margin: "0 20px",
-        "& a": {
-            textDecoration: "none"
-        }
     },
     title: {
         fontSize: "3rem",
         color: "#000b33"
+    },
+    snippetGroup: {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "680px",
+        margin: "auto"
     },
     snippet: {
         margin: 20
@@ -55,11 +61,13 @@ class JournalList extends Component {
                         <h1 className={classes.title}>Your Journals</h1>
                         <ActivityNotification journal={recentJournals[0]}/>
                     </div>
-                    {[...new Array(5)].map((value,i) => (
-                        <div className={classes.snippet}>
-                            <JournalSnippet journal={recentJournals[i]}/>
-                        </div>
-                    ))}
+                    <div className={classes.snippetGroup}>
+                        {[...new Array(8)].map((value,i) => (
+                            <div className={classes.snippet}>
+                                <JournalSnippet journal={recentJournals[i]}/>
+                            </div>
+                        ))}
+                    </div>
                     <Link to="/journals/all">
                         <Button variant="contained" color="primary">See All</Button>
                     </Link>

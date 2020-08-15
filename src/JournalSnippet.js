@@ -4,7 +4,7 @@ import JournalDetails from './JournalDetails';
 
 const styles = {
     root: {
-        width: "500px",
+        width: "300px",
         margin: "auto",
         "&:hover div": {
             transition: "transform 0.3s ease",

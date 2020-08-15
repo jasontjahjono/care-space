@@ -185,17 +185,15 @@ class ProgressGraph extends Component {
                 </div>
                 {type === "mood" ? (
                     <div>
-                        <h3>Your average mood is {moods[average-1]}</h3>
+                        <h3>Your Average Mood in the Last {interval === 7 ? "Week" : "Month"} is {moods[average-1]}</h3>
                         <p>{phrasesMood[average-1]}</p>
                     </div>
                 ) : (
                     <div>
-                        <h3>Your average energy is {tired[average-1]}</h3>
+                        <h3>Your Average Energy in the Last {interval === 7 ? "Week" : "Month"} is {tired[average-1]}</h3>
                         <p>{phrasesTired[average-1]}</p>
                     </div>
-                )}
-
-                
+                )}   
             </div>
         )
     }

@@ -31,7 +31,6 @@ class JournalFormSlider extends Component {
     constructor(props) {
         super(props);
         this.valueLabelFormat = this.valueLabelFormat.bind(this);
-        // this.valueLabelTired = this.valueLabelTired.bind(this);
         this.valuetext = this.valuetext.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -48,7 +47,7 @@ class JournalFormSlider extends Component {
             : tired[tired.findIndex((item) => item.value === value)].label
     }
     render() {
-        const {classes, type, disabled} = this.props;
+        const {classes, type} = this.props;
         return (
             <div className={classes.slider}>
                 <div>

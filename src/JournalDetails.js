@@ -1,26 +1,3 @@
-// Mood Today (1-5)
-// 1. Horrible :(
-// 2. Bad :/
-// 3. Moderate :|
-// 4. Good :)
-// 5. Excellent :D
-
-//Positive things ["", "",]
-//Negative things ["", "",]
-
-//Tiredness Level (1-5)
-
-//Last Time Whole Meal ""
-// Yes or No Questions
-// 1. Did you sleep well last night?
-// 2. 
-// 3. 
-
-//Planner -- What goals tomorrow
-// -- Work (Creative Aspects)
-// -- Physical Health
-// -- Recreation (How to Relax)
-
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';

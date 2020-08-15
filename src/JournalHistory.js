@@ -3,11 +3,12 @@ import {withStyles} from '@material-ui/styles';
 import {Link} from 'react-router-dom';
 import JournalSnippet from './JournalSnippet';
 import Button from '@material-ui/core/Button';
+import Fade from '@material-ui/core/Fade';
 
 const styles = {
     root: {
         backgroundColor: "#fafafa",
-        width: "770px",
+        width: "970px",
         margin: "auto",
         boxShadow: "2px 2px 10px rgba(0,0,0,0.3)",
         borderRadius: "50px",
@@ -31,32 +32,51 @@ const styles = {
         cursor: "default"
     },
     snippet: {
-        margin: 20
+        margin: 10
+    },
+    snippetGroup: {
+        display: "flex",
+        flexWrap: "wrap",
+        margin: "auto"
     }
 }
 
 class JournalHistory extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            historyOpen: false,
+        }
+    }
+    componentDidMount() {
+        this.setState({historyOpen: true});
+    }
     render() {
         const {journals, classes} = this.props;
+        const {historyOpen} = this.state;
         return (
-            <div className={classes.root}>
-                <div className={classes.heading}>
-                    <Link to="/">
-                        <Button variant="contained" color="primary">
+            <Fade in={historyOpen} timeout={1000}>
+                <div className={classes.root}>
+                    <div className={classes.heading}>
+                        <Link to="/">
+                            <Button variant="contained" color="primary">
+                                Back
+                            </Button>
+                        </Link>
+                        <h1 className={classes.title}>Journal Bank</h1>
+                        <Button variant="contained" color="primary" className={classes.backBtn}>
                             Back
                         </Button>
-                    </Link>
-                    <h1 className={classes.title}>Journal Bank</h1>
-                    <Button variant="contained" color="primary" className={classes.backBtn}>
-                        Back
-                    </Button>
-                </div>
-                {journals.map(data => (
-                    <div className={classes.snippet}>
-                        <JournalSnippet journal={data}/>
                     </div>
-                ))}
-            </div>
+                    <div className={classes.snippetGroup}>
+                        {journals.map(data => (
+                            <div className={classes.snippet}>
+                                <JournalSnippet journal={data}/>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Fade>
         )
     }
 }

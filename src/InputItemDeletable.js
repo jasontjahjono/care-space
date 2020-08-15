@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {withStyles} from '@material-ui/styles';
 import Chip from '@material-ui/core/Chip';
+import DoneIcon from '@material-ui/icons/Done';
+
 
 const styles = {
     root: {
@@ -29,6 +31,7 @@ class InputItemDeletable extends Component {
                     color={color}
                     onDelete={this.handleDelete}
                     variant={variant}
+                    deleteIcon={<DoneIcon />}
                 />
             </div>
         )

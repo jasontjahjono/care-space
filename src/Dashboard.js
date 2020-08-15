@@ -4,9 +4,7 @@ import JournalList from './JournalList';
 import ProgressGraph from './ProgressGraph';
 import Typist from 'react-typist';
 import FAQ from './FAQ';
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
-import "./transitionStyles.css";
-import Fade from '@material-ui/core/Fade';
+import Grow from '@material-ui/core/Grow';
 
 const styles = {
     root: {
@@ -42,46 +40,58 @@ class Dashboard extends Component {
         }
     }
     componentDidMount() {
-        setTimeout(() => this.setState({moodOpen: true}), 4700);
-        setTimeout(() => this.setState({energyOpen: true}), 5500);
-        setTimeout(() => this.setState({journalOpen: true}), 6300);
-        setTimeout(() => this.setState({faqOpen: true}), 7100);
+        if(this.props.loadIntro) {
+            setTimeout(() => this.setState({moodOpen: true}), 4700);
+            setTimeout(() => this.setState({energyOpen: true}), 5500);
+            setTimeout(() => this.setState({journalOpen: true}), 6300);
+            setTimeout(() => this.setState({faqOpen: true}), 7100);
+        } else {
+            this.setState({moodOpen: true, energyOpen: true, journalOpen: true, faqOpen: true});
+        }   
     }
     render() {
-        const {classes, journals} = this.props;
+        const {classes, journals, loadIntro} = this.props;
         const {moodOpen, energyOpen, journalOpen, faqOpen} = this.state;
         return (
             <div className={classes.root}>
-                <div className={classes.titleGroup}>
-                    <Typist avgTypingDelay={100} cursor={{show: false}}>
+                {loadIntro ? (
+                    <div className={classes.titleGroup}>
+                        <Typist avgTypingDelay={100} cursor={{show: false}}>
+                            <h3 className={classes.greeting}>Welcome to</h3>
+                            <h1 className={classes.title}>CareSpace</h1>
+                        </Typist>
+                        <Typist avgTypingDelay={40} cursor={{show: false}}>
+                            <Typist.Delay ms={2500} /> 
+                            <p>Guiding you back on track to your healthy habits</p>
+                        </Typist>
+                    </div>
+                ) : (
+                    <div className={classes.titleGroup}>
                         <h3 className={classes.greeting}>Welcome to</h3>
                         <h1 className={classes.title}>CareSpace</h1>
-                    </Typist>
-                    <Typist avgTypingDelay={40} cursor={{show: false}}>
-                        <Typist.Delay ms={2500} /> 
                         <p>Guiding you back on track to your healthy habits</p>
-                    </Typist>
-                </div>
-                <Fade in={moodOpen} timeout={1000}>
+                    </div>
+                )}
+                <Grow in={moodOpen} timeout={1000}>
                     <div>
                         <ProgressGraph journals={journals} type="mood" changeBoard={this.changeBoard}/>
                     </div>
-                </Fade>
-                <Fade in={energyOpen} timeout={1000}>
+                </Grow>
+                <Grow in={energyOpen} timeout={1000}>
                     <div>
                         <ProgressGraph journals={journals} type="tired" changeBoard={this.changeBoard}/>
                     </div>
-                </Fade>
-                <Fade in={journalOpen} timeout={1000}>
+                </Grow>
+                <Grow in={journalOpen} timeout={1000}>
                     <div>
                         <JournalList journals={journals}/>
                     </div>
-                </Fade>
-                <Fade in={faqOpen} timeout={1000}>
+                </Grow>
+                <Grow in={faqOpen} timeout={1000}>
                     <div>
                         <FAQ />
                     </div>
-                </Fade>
+                </Grow>
             </div>
         )
     }

@@ -7,6 +7,7 @@ import JournalFormInput from './JournalFormInput';
 import TimePicker from './TimePicker';
 import InputItem from './InputItem';
 import YesNoQuestion from './YesNoQuestion';
+import Fade from '@material-ui/core/Fade';
 
 const styles = {
     root: {
@@ -90,7 +91,8 @@ class JournalNewForm extends Component {
                 [],
                 [],
                 []
-            ]
+            ],
+            formOpen: false
         }
         this.changeMood = this.changeMood.bind(this);
         this.changeTired = this.changeTired.bind(this);
@@ -98,6 +100,9 @@ class JournalNewForm extends Component {
         this.changeMealTime = this.changeMealTime.bind(this);
         this.toggleAnswer = this.toggleAnswer.bind(this);
         this.handleClick = this.handleClick.bind(this);
+    }
+    componentDidMount() {
+        this.setState({formOpen: true});
     }
     changeMood(value) {
         this.setState({mood: value});
@@ -170,92 +175,99 @@ class JournalNewForm extends Component {
         this.props.history.push('/');
     }
     render() {
-        const {plus, minus, plan, meal, ynquestions} = this.state;
+        const {plus, minus, plan, meal, ynquestions, formOpen} = this.state;
         const {classes} = this.props;
         return (
-            <div className={classes.root}>
-                <div className={classes.container}>
-                    <h1 className={classes.heading}>Add a New Journal Entry</h1>
-                    <p className={classes.description}>
-                        This journal entry will help you reflect, plan, and ultimately be in control of your life!
-                    </p>
-                    <h3>How is Your Mood Today?</h3>
-                    <JournalFormSlider handleChange={this.changeMood} type="moods"/>
-                    <h3 className={classes.title}>List Positive and Negative Things that Happened Today</h3>
-                    <div className={classes.plusMinus}>
-                        <div className={classes.inputContainer}>
-                            <JournalFormInput addData={this.addInput} idNum={4} label="Positive Things Today"/>
-                            <div>
-                            {plus.map(item => (
-                                <InputItem text={item} color="primary"/>
+            <Fade in={formOpen} timeout={1000}>
+                <div className={classes.root}>
+                    <div className={classes.container}>
+                        <h1 className={classes.heading}>Add a New Journal Entry</h1>
+                        <p className={classes.description}>
+                            This journal entry will help you reflect, plan, and ultimately be in control of your life!
+                        </p>
+                        <h3>How is Your Mood Today?</h3>
+                        <JournalFormSlider handleChange={this.changeMood} type="moods"/>
+                        <h3 className={classes.title}>List Positive and Negative Things that Happened Today</h3>
+                        <div className={classes.plusMinus}>
+                            <div className={classes.inputContainer}>
+                                <JournalFormInput addData={this.addInput} idNum={4} label="Positive Things Today"/>
+                                <div>
+                                {plus.map(item => (
+                                    <InputItem text={item} color="primary"/>
+                                ))}
+                                </div>
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <JournalFormInput addData={this.addInput} idNum={5} label="Negative Things Today"/>
+                                <div>
+                                    {minus.map(item => (
+                                        <InputItem text={item} color="secondary"/>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        <h3>How Tired are You Today?</h3>
+                        <JournalFormSlider handleChange={this.changeTired} type="tired"/>
+                        <h3 className={classes.title}>What Time did You Last Ate a Whole Meal?</h3>
+                        <TimePicker meal={meal} changeMealTime={this.changeMealTime}/>
+                        <h3 className={classes.title}>Daily Self-Care Questions</h3>
+                        <div className={classes.questionBox}>
+                            {ynquestions.map((bool,i) => (
+                                <YesNoQuestion
+                                    index={i}
+                                    checked={bool}
+                                    toggleAnswer={this.toggleAnswer}
+                                    disabled={false}
+                                />
                             ))}
+                        </div>
+                        <h3 className={classes.title}>What Do You Want to Achieve Tomorrow?</h3>
+                        <div className={classes.plan}>
+                            <div className={classes.planContainer}>
+                                <JournalFormInput addData={this.addInput} idNum={1} label="Work Plan"/>
+                                <div>
+                                    {plan[0].map(item => (
+                                        <InputItem text={item} color="primary"/>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className={classes.planContainer}>
+                                <JournalFormInput addData={this.addInput} idNum={2} label="Physical Health Plan"/>
+                                <div>
+                                    {plan[1].map(item => (
+                                        <InputItem text={item} color="secondary"/>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className={classes.planContainer}>
+                                <JournalFormInput addData={this.addInput} idNum={3} label="Recreation Plan"/>
+                                <div>
+                                    {plan[2].map(item => (
+                                        <InputItem text={item} color="primary"/>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                        <div className={classes.inputContainer}>
-                            <JournalFormInput addData={this.addInput} idNum={5} label="Negative Things Today"/>
-                            <div>
-                                {minus.map(item => (
-                                    <InputItem text={item} color="secondary"/>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <h3>How Tired are You Today?</h3>
-                    <JournalFormSlider handleChange={this.changeTired} type="tired"/>
-                    <h3 className={classes.title}>What Time did You Last Ate a Whole Meal?</h3>
-                    <TimePicker meal={meal} changeMealTime={this.changeMealTime}/>
-                    <h3 className={classes.title}>Daily Self-Care Questions</h3>
-                    <div className={classes.questionBox}>
-                        {ynquestions.map((bool,i) => (
-                            <YesNoQuestion index={i} checked={bool} toggleAnswer={this.toggleAnswer} disabled={false}/>
-                        ))}
-                    </div>
-                    <h3 className={classes.title}>What Do You Want to Achieve Tomorrow?</h3>
-                    <div className={classes.plan}>
-                        <div className={classes.planContainer}>
-                            <JournalFormInput addData={this.addInput} idNum={1} label="Work Plan"/>
-                            <div>
-                                {plan[0].map(item => (
-                                    <InputItem text={item} color="primary"/>
-                                ))}
-                            </div>
-                        </div>
-                        <div className={classes.planContainer}>
-                            <JournalFormInput addData={this.addInput} idNum={2} label="Physical Health Plan"/>
-                            <div>
-                                {plan[1].map(item => (
-                                    <InputItem text={item} color="secondary"/>
-                                ))}
-                            </div>
-                        </div>
-                        <div className={classes.planContainer}>
-                            <JournalFormInput addData={this.addInput} idNum={3} label="Recreation Plan"/>
-                            <div>
-                                {plan[2].map(item => (
-                                    <InputItem text={item} color="primary"/>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className={classes.btns}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleClick}
-                        >
-                            Save Journal
-                        </Button>
-                        <Link to="/">
+                        <div className={classes.btns}>
                             <Button
                                 variant="contained"
-                                color="default"
+                                color="primary"
+                                onClick={this.handleClick}
                             >
-                                Cancel
+                                Save Journal
                             </Button>
-                        </Link>
+                            <Link to="/">
+                                <Button
+                                    variant="contained"
+                                    color="default"
+                                >
+                                    Cancel
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Fade>
         )
     }
 }

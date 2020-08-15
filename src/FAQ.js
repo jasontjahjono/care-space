@@ -1,57 +1,3 @@
-// import React, {Component} from 'react';
-// import Question from './Question';
-// import {withStyles} from '@material-ui/core/styles';
-// import List from '@material-ui/core/List';
-
-// const styles = {
-//     title:{
-//         display: "wrap",
-//         fontFamily: "Mulish",
-//         fontSize: "3rem",
-//         justifyContent: "left",
-//         padding: "5px",
-//         margin: "auto"
-//     },
-//     border: {
-//         backgroundColor: "white",
-//         width: "950px",
-//         margin: "auto",
-//         padding: "50px 0",
-//         boxShadow: "2px 2px 10px rgba(0,0,0,0.3)",
-//         borderRadius: "50px",
-//     }      
-// }
-
-// class FAQ extends Component {
-//     constructor(props) {
-//         super(props)
-        
-//         this.handleOpen = this.handleOpen.bind(this);
-//     }
-
-//     handleOpen(index) {
-//         let newOpenState = [...this.state.open];
-//         newOpenState[index] = !this.state.open[index];
-//         this.setState({open: newOpenState}, () => console.log(this.state.open));
-//     }
-
-//     render() {
-//         const {classes} = this.props;
-//         const {answers, open} = this.state;
-//         return (
-//             <div className={classes.border}>
-//                 <h2 className={classes.title}>Frequently Asked Questions</h2>
-//                 <List>
-//                     {this.state.questionText.map((question, i) => (
-//                         <Question questionText={question} answersText={answers[i]} open={open} handleOpen={this.handleOpen} index={i}/>
-//                     ))}
-//                 </List>
-//             </div> 
-//         )
-//     }
-// }
-// export default withStyles(styles)(FAQ);
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -78,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         boxShadow: "2px 2px 10px rgba(0,0,0,0.3)",
+        color: "#000b33"
     },
     footer: {
         width: 950,
